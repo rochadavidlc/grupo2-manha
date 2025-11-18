@@ -42,7 +42,7 @@ class App(tk.Tk):
         self.canvas = tk.Canvas(self, bg="white")
         self.canvas.pack(fill="both", expand=True, padx=10, pady=10)
 
-        self.draw_graph(GRAPH)
+        self.canvas.bind("<Configure>", lambda e: self.draw_graph(GRAPH, event=e))
 
     def on_check(self):
         a = self.a_entry.get().strip()
@@ -56,12 +56,26 @@ class App(tk.Tk):
         except Exception as e:
             messagebox.showerror("Erro", str(e))
 
-    def draw_graph(self, graph):
+    def draw_graph(self, graph, event=None):
         self.canvas.delete("all")
         nodes = list(graph.keys())
         n = max(1, len(nodes))
         W = self.canvas.winfo_width() or 720
         H = self.canvas.winfo_height() or 460
+        cx, cy, r = W/2, H/2, min(W,H)*0.35
+
+        # usar dimensões do evento quando disponível, senão usar winfo_* e fallback se muito pequenas
+        if event is not None:
+            W, H = event.width, event.height
+        else:
+            W = self.canvas.winfo_width()
+            H = self.canvas.winfo_height()
+
+        if not W or W <= 1:
+            W = 720
+        if not H or H <= 1:
+            H = 460
+
         cx, cy, r = W/2, H/2, min(W,H)*0.35
 
         pos = {}

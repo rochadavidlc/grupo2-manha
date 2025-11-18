@@ -29,4 +29,25 @@ def navigate_tree(node, answers):
     #     - Pegue a próxima resposta, normalize para minúsculas, trate 'nao' como 'não'.
     #     - Se "sim": vá para node.yes; se "não": vá para node.no; senão levante ValueError("Resposta inválida: ...")
     # - Ao chegar numa folha, retorne node.question (a decisão final).
-    raise NotImplementedError("Implemente a função navigate_tree.")
+    while node is not None and not is_leaf(node):
+        # - Se não houver mais respostas, levante ValueError("Faltam respostas para concluir a decisão.")        
+        if not answers:
+            raise ValueError("Faltam respostas para concluir a decisão.")
+        
+        # - Se "sim": vá para node.yes; se "não": vá para node.no; senão levante ValueError("Resposta inválida: ...")
+        answer = answers.pop(0).strip().lower()
+        if answer == "sim":
+            node = node.yes
+
+        # - Pegue a próxima resposta, normalize para minúsculas, trate 'nao' como 'não'.
+        elif answer == "não" or answer == "nao":
+            node = node.no
+
+        else:
+            raise ValueError(f"Resposta inválida: '{answer}'. Responda apenas 'sim' ou 'não'.")
+        
+        # - Ao chegar numa folha, retorne node.question (a decisão final).
+    if is_leaf(node):
+        return node.question
+    else:
+        raise ValueError("Faltam respostas para concluir a decisão.")

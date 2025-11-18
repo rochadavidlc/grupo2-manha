@@ -1,10 +1,9 @@
 navigate_three
 resposta: 
 Ao executar o software e utilizar uma opção de "sim" ou "nao" o arquivo dá um erro com a mensagem "Implemente a função "navigate_tree."
-Ao implementar essa função com a orientação do tree_logic.py este problema se resolve.
+Ao implementar essa função com a orientação do tree_logic.py este problema se resolve. 
 
-def navigate_tree(node, answers):
-    """
+"""
     Percorre a árvore a partir de 'node' seguindo a sequência de respostas (lista de strings).
     Cada resposta deve ser 'sim' ou 'não' (aceite 'nao' como 'não').
     Retorna a decisão final (string) quando alcançar uma folha.
@@ -12,6 +11,8 @@ def navigate_tree(node, answers):
     Se alguma resposta for inválida, levante ValueError com mensagem clara.
     >>> # Exemplo (não-executável aqui): navigate_tree(root, ["sim", "não"]) -> "É um pardal/pássaro diurno"
     """
+
+    def navigate_tree(node, answers):
     while node is not None and not is_leaf(node):      
             if not answers:
                 raise ValueError("Faltam respostas para concluir a decisão.")
@@ -36,14 +37,16 @@ resposta:
 Ao executar o software e utilizar uma opção de conectar duas pessoas A e B, outro erro aparece com a mensagem "Implemente a função connected usando apenas listas."
 Ao implementar essa função com a orientação do graph_logic.py este problema se resolve.
 
-def connected(graph, a, b):
-    """
-    Retorna True apenas se 'a' e 'b' estiverem diretamente ligados:
-    - b aparece na lista de adjacência de a, ou
-    - a aparece na lista de adjacência de b
-    Normaliza nomes (case-insensitive, strip).
-    """
+"""
+Percorre a árvore a partir de 'node' seguindo a sequência de respostas (lista de strings).
+Cada resposta deve ser 'sim' ou 'não' (aceite 'nao' como 'não').
+Retorna a decisão final (string) quando alcançar uma folha.
+Se a sequência terminar antes de chegar a uma folha, levante ValueError com dica.
+Se alguma resposta for inválida, levante ValueError com mensagem clara.
+>>> # Exemplo (não-executável aqui): navigate_tree(root, ["sim", "não"]) -> "É um pardal/pássaro diurno"
+"""
 
+    def connected(graph, a, b):
     def norm(x):
         return x.strip().lower() if isinstance(x, str) else x
 
